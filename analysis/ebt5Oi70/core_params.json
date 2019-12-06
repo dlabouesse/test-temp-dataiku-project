@@ -1,0 +1,178 @@
+{
+  "inputDatasetSmartName": "dss_ml_by_templates",
+  "script": {
+    "steps": [
+      {
+        "type": "FilterOnValue",
+        "params": {
+          "values": [
+            "{\"CUSTOM_PYTHON_0\":{\"enabled\":true,\"name\":\"Custom Python model\",\"code\":\"\\\"CatBoost\\\"\\n\\nfrom catboost import CatBoostClassifier\\n\\nclf \u003d CatBoostClassifier(\\n    iterations\u003d100,\\n    learning_rate\u003d0.5,\\n    early_stopping_rounds\u003d20\\n)\\n\"}}",
+            "{\"CUSTOM_PYTHON_1\":{\"enabled\":true,\"name\":\"Custom Python model\",\"code\":\"\\\"XGBoost\\\"\\n\\nimport xgboost as xgb\\nclf \u003d  xgb.XGBClassifier(\\n    gamma\u003d0,\\n    max_depth\u003d6,\\n    min_child_weight\u003d1\\n    )\\n\\n\"}}"
+          ],
+          "matchingMode": "FULL_STRING",
+          "normalizationMode": "EXACT",
+          "action": "REMOVE_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_algorithms"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FilterOnValue",
+        "params": {
+          "values": [
+            "DEFAULT"
+          ],
+          "matchingMode": "FULL_STRING",
+          "normalizationMode": "EXACT",
+          "action": "KEEP_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_guessPolicy"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": true,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "ColumnReorder",
+        "params": {
+          "reorderAction": "BEFORE_COLUMN",
+          "referenceColumn": "event_details_json_algorithms",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_guessPolicy"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "ColumnReorder",
+        "params": {
+          "reorderAction": "AT_START",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "count"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FilterOnNumericalRange",
+        "params": {
+          "min": 100.0,
+          "max": 200.0,
+          "action": "KEEP_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "count"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": true,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "JSONFlattener",
+        "params": {
+          "inCol": "event_details_json_algorithms",
+          "maxDepth": 2,
+          "flattenArrays": false,
+          "prefixOutputs": true,
+          "separator": "_",
+          "nullAsEmpty": true
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      }
+    ],
+    "maxProcessedMemTableBytes": -1,
+    "columnsSelection": {
+      "mode": "ALL"
+    },
+    "coloring": {
+      "scheme": "MEANING_AND_STATUS",
+      "individualColumns": [],
+      "valueColoringMode": "HASH"
+    },
+    "sorting": [
+      {
+        "column": "count",
+        "ascending": false
+      }
+    ],
+    "analysisColumnData": {},
+    "explorationSampling": {
+      "selection": {
+        "maxStoredBytes": -1,
+        "filter": {
+          "distinct": false,
+          "enabled": false
+        },
+        "partitionSelectionMethod": "ALL",
+        "latestPartitionsN": 1,
+        "ordering": {
+          "enabled": false,
+          "rules": []
+        },
+        "samplingMethod": "HEAD_SEQUENTIAL",
+        "maxRecords": 10000,
+        "targetRatio": 0.02,
+        "withinFirstN": -1,
+        "maxReadUncompressedBytes": -1
+      },
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "vizSampling": {
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "exploreUIParams": {
+      "autoRefresh": true
+    },
+    "globalSearchQuery": "",
+    "explorationFilters": [],
+    "previewMode": "ALL_ROWS"
+  },
+  "charts": [],
+  "name": "Analyze dss_ml_by_templates",
+  "versionTag": {
+    "versionNumber": 1,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574862435799
+  },
+  "creationTag": {
+    "versionNumber": 0,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574861245675
+  },
+  "tags": [],
+  "customFields": {},
+  "checklists": {
+    "checklists": []
+  }
+}

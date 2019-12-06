@@ -1,0 +1,335 @@
+{
+  "columnsSelection": {
+    "mode": "ALL"
+  },
+  "explorationSampling": {
+    "_refreshTrigger": 0,
+    "selection": {
+      "filter": {
+        "distinct": false,
+        "enabled": false
+      },
+      "latestPartitionsN": 1,
+      "maxRecords": 10000,
+      "ordering": {
+        "rules": [],
+        "enabled": false
+      },
+      "withinFirstN": -1,
+      "partitionSelectionMethod": "ALL",
+      "maxStoredBytes": -1,
+      "targetRatio": 0.02,
+      "maxReadUncompressedBytes": -1,
+      "samplingMethod": "HEAD_SEQUENTIAL"
+    },
+    "autoRefreshSample": false
+  },
+  "explorationFilters": [],
+  "origin": "PREPARE_RECIPE",
+  "exploreUIParams": {
+    "autoRefresh": true
+  },
+  "steps": [
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_guessPolicy"
+        ],
+        "values": [
+          "DEFAULT"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "REMOVE_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_predictionType"
+        ],
+        "values": [
+          "BINARY_CLASSIFICATION"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "KEEP_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_guessPolicy"
+        ],
+        "values": [
+          "PERFORMANCE"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "KEEP_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnReorder",
+      "params": {
+        "columns": [
+          "count"
+        ],
+        "reorderAction": "AT_START",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnReorder",
+      "params": {
+        "referenceColumn": "event_details_json_algorithms",
+        "columns": [
+          "event_details_json_predictionType",
+          "event_details_json_guessPolicy"
+        ],
+        "reorderAction": "BEFORE_COLUMN",
+        "appliesTo": "COLUMNS"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "JSONFlattener",
+      "params": {
+        "maxDepth": 1,
+        "inCol": "event_details_json_algorithms",
+        "nullAsEmpty": true,
+        "prefixOutputs": false,
+        "flattenArrays": false,
+        "separator": "_"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"random_forest_classification\"]\n        if len(rf) \u003e0:\n            original \u003d \u0027{\"enabled\":true,\"n_estimators\":[100],\"n_jobs\":4,\"max_tree_depth\":[5,10,15,20],\"min_samples_leaf\":[1,10,100],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3}\u0027\n            return rf \u003d\u003d original\n       \n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "rf_original",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"decision_tree_classification\"]\n        if len(rf)\u003e0:\n            original \u003d \u0027{\"enabled\":true,\"max_depth\":[5],\"gini\":true,\"entropy\":false,\"min_samples_leaf\":[1],\"best\":true,\"random\":false}\u0027\n            return rf \u003d\u003d original\n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "decision_tree_original",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"xgboost\"]\n        if len(rf)\u003e0:\n            original \u003d \u0027{\"enabled\":true,\"max_depth\":[1,2,3,5,10],\"learning_rate\":[0.01,0.05,0.1,0.3,0.5],\"gamma\":[0],\"min_child_weight\":[0],\"max_delta_step\":[0],\"subsample\":[0.75,1],\"colsample_bytree\":[0.75,1],\"colsample_bylevel\":[1],\"alpha\":[0],\"lambda\":[1],\"gbtree\":true,\"dart\":false,\"reg_linear\":true,\"reg_logistic\":false,\"reg_gamma\":false,\"binary_logistic\":false,\"multi_softprob\":false,\"n_estimators\":300,\"nthread\":4,\"scale_pos_weight\":1,\"base_score\":0.5,\"impute_missing\":false,\"missing\":0,\"cpu_tree_method\":\"auto\",\"gpu_tree_method\":\"gpu_exact\",\"enable_cuda\":false,\"seed\":1337,\"enable_early_stopping\":true,\"early_stopping_rounds\":4}\u0027\n            return rf \u003d\u003d original\n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "xgboost_original",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"svc_classifier\"]\n        if len(rf)\u003e0:\n            original \u003d \u0027{\"enabled\":true,\"C\":[1],\"gamma\":[0],\"linear\":false,\"poly\":false,\"rbf\":true,\"sigmoid\":false,\"coef0\":0,\"tol\":0.001,\"max_iter\":-1}\u0027\n            return rf \u003d\u003d original\n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "svc_original",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"event_details_json_algorithms\"]\n        if len(rf)\u003e0:\n            original \u003d \u0027{\"random_forest_classification\":{\"enabled\":true,\"n_estimators\":[100],\"n_jobs\":4,\"max_tree_depth\":[5,10,15,20],\"min_samples_leaf\":[1,10,100],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3},\"xgboost\":{\"enabled\":true,\"max_depth\":[1,2,3,5,10],\"learning_rate\":[0.01,0.05,0.1,0.3,0.5],\"gamma\":[0],\"min_child_weight\":[0],\"max_delta_step\":[0],\"subsample\":[0.75,1],\"colsample_bytree\":[0.75,1],\"colsample_bylevel\":[1],\"alpha\":[0],\"lambda\":[1],\"gbtree\":true,\"dart\":false,\"reg_linear\":true,\"reg_logistic\":false,\"reg_gamma\":false,\"binary_logistic\":false,\"multi_softprob\":false,\"n_estimators\":300,\"nthread\":4,\"scale_pos_weight\":1,\"base_score\":0.5,\"impute_missing\":false,\"missing\":0,\"cpu_tree_method\":\"auto\",\"gpu_tree_method\":\"gpu_exact\",\"enable_cuda\":false,\"seed\":1337,\"enable_early_stopping\":true,\"early_stopping_rounds\":4}}\u0027\n            return rf \u003d\u003d original\n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "performance_original_small",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    try:\n        rf \u003d row[\"event_details_json_algorithms\"]\n        if len(rf)\u003e0:\n            original \u003d \u0027{\"random_forest_classification\":{\"enabled\":true,\"n_estimators\":[100],\"n_jobs\":4,\"max_tree_depth\":[5,10,15,20],\"min_samples_leaf\":[1,10,100],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3},\"extra_trees\":{\"enabled\":true,\"n_estimators\":[30],\"n_jobs\":4,\"max_tree_depth\":[8],\"min_samples_leaf\":[3],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3},\"gbt_classification\":{\"deviance\":true,\"exponential\":false,\"enabled\":true,\"n_estimators\":[100],\"max_depth\":[3],\"min_samples_leaf\":[3],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3,\"learning_rate\":[0.1]},\"decision_tree_classification\":{\"enabled\":true,\"max_depth\":[5],\"gini\":true,\"entropy\":false,\"min_samples_leaf\":[1],\"best\":true,\"random\":false},\"knn\":{\"enabled\":true,\"k\":[5],\"distance_weighting\":false,\"algorithm\":\"auto\",\"p\":2,\"leaf_size\":30},\"logistic_regression\":{\"enabled\":true,\"multi_class\":\"ovr\",\"l1\":false,\"l2\":true,\"C\":[0.01,0.1,1,10,100],\"n_jobs\":2},\"neural_network\":{\"enabled\":true,\"layer_sizes\":[10],\"activation\":\"relu\",\"solver\":\"adam\",\"alpha\":0.001,\"batch_size\":200,\"auto_batch\":true,\"max_iter\":200,\"seed\":1337,\"tol\":0.0001,\"early_stopping\":false,\"validation_fraction\":0.1,\"beta_1\":0.9,\"beta_2\":0.999,\"epsilon\":1e-8,\"learning_rate\":\"constant\",\"power_t\":0.5,\"momentum\":0.8,\"nesterovs_momentum\":true,\"shuffle\":true,\"learning_rate_init\":0.001},\"svc_classifier\":{\"enabled\":true,\"C\":[1],\"gamma\":[0],\"linear\":false,\"poly\":false,\"rbf\":true,\"sigmoid\":false,\"coef0\":0,\"tol\":0.001,\"max_iter\":-1},\"sgd_classifier\":{\"enabled\":true,\"log\":true,\"modified_huber\":false,\"l2\":false,\"l1\":true,\"elasticnet\":false,\"alpha\":[0.001,0.0001,0.00001],\"l1_ratio\":0.15,\"max_iter\":1000,\"tol\":0.001,\"n_jobs\":2},\"xgboost\":{\"enabled\":true,\"max_depth\":[1,2,3,5,10],\"learning_rate\":[0.01,0.05,0.1,0.3,0.5],\"gamma\":[0],\"min_child_weight\":[0],\"max_delta_step\":[0],\"subsample\":[0.75,1],\"colsample_bytree\":[0.75,1],\"colsample_bylevel\":[1],\"alpha\":[0],\"lambda\":[1],\"gbtree\":true,\"dart\":false,\"reg_linear\":true,\"reg_logistic\":false,\"reg_gamma\":false,\"binary_logistic\":false,\"multi_softprob\":false,\"n_estimators\":300,\"nthread\":4,\"scale_pos_weight\":1,\"base_score\":0.5,\"impute_missing\":false,\"missing\":0,\"cpu_tree_method\":\"auto\",\"gpu_tree_method\":\"gpu_exact\",\"enable_cuda\":false,\"seed\":1337,\"enable_early_stopping\":true,\"early_stopping_rounds\":4},\"lars_params\":{\"enabled\":true,\"max_features\":0,\"K\":100}}\u0027\n            return rf \u003d\u003d original\n    except:\n        return \u0027\u0027\n",
+        "useKernel": false,
+        "column": "performance_original_large",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnsSelector",
+      "params": {
+        "columns": [
+          "CUSTOM_PYTHON_0",
+          "CUSTOM_PYTHON_1",
+          "decision_tree_classification",
+          "extra_trees",
+          "gbt_classification",
+          "random_forest_classification",
+          "knn",
+          "logistic_regression",
+          "mllib_dt",
+          "mllib_gbt",
+          "mllib_logit",
+          "mllib_rf",
+          "xgboost",
+          "lars_params",
+          "neural_network",
+          "svc_classifier",
+          "sgd_classifier"
+        ],
+        "keep": false,
+        "appliesTo": "COLUMNS"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": true,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    large \u003d row[\"performance_original_large\"]\n    small \u003d row[\"performance_original_small\"]\n    if (large \u003d\u003d \"True\") or (small \u003d\u003d \"True\"):\n        return 1\n    else:\n        return 0\n",
+        "useKernel": false,
+        "column": "original",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    }
+  ],
+  "maxProcessedMemTableBytes": -1,
+  "previewMode": "ALL_ROWS",
+  "vizSampling": {
+    "_refreshTrigger": 0,
+    "autoRefreshSample": false
+  },
+  "analysisColumnData": {},
+  "sorting": [
+    {
+      "column": "count",
+      "ascending": false
+    }
+  ],
+  "globalSearchQuery": "",
+  "coloring": {
+    "scheme": "MEANING_AND_STATUS",
+    "individualColumns": [],
+    "valueColoringMode": "HASH"
+  }
+}

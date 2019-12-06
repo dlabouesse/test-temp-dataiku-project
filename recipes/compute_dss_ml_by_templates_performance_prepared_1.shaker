@@ -1,0 +1,158 @@
+{
+  "columnsSelection": {
+    "mode": "ALL"
+  },
+  "explorationSampling": {
+    "_refreshTrigger": 0,
+    "selection": {
+      "filter": {
+        "distinct": false,
+        "enabled": false
+      },
+      "latestPartitionsN": 1,
+      "maxRecords": 10000,
+      "ordering": {
+        "rules": [],
+        "enabled": false
+      },
+      "withinFirstN": -1,
+      "partitionSelectionMethod": "ALL",
+      "maxStoredBytes": -1,
+      "targetRatio": 0.02,
+      "maxReadUncompressedBytes": -1,
+      "samplingMethod": "HEAD_SEQUENTIAL"
+    },
+    "autoRefreshSample": false
+  },
+  "explorationFilters": [],
+  "origin": "PREPARE_RECIPE",
+  "exploreUIParams": {
+    "autoRefresh": true
+  },
+  "steps": [
+    {
+      "preview": false,
+      "name": "move (copy)",
+      "metaType": "GROUP",
+      "disabled": false,
+      "steps": [
+        {
+          "preview": false,
+          "metaType": "PROCESSOR",
+          "disabled": false,
+          "type": "PythonUDF",
+          "params": {
+            "mode": "CELL",
+            "envSelection": {
+              "envMode": "INHERIT"
+            },
+            "stopOnError": true,
+            "pythonSourceCode": "# Modify the process function to fit your needs\nimport json\n\ndef process(row):\n    try:\n        algo_details \u003d row[\"event_details_json_algorithms\"]\n        algo_details \u003d json.loads(algo_details)\n        algos \u003d algo_details.keys()\n        return algos\n    except:\n        return \u0027\u0027",
+            "useKernel": false,
+            "column": "all_algos",
+            "sourceColumnsList": [],
+            "usePythonUnicode": true,
+            "vectorSize": 256,
+            "vectorize": false
+          },
+          "alwaysShowComment": false
+        },
+        {
+          "preview": false,
+          "metaType": "PROCESSOR",
+          "disabled": false,
+          "type": "PythonUDF",
+          "params": {
+            "mode": "CELL",
+            "envSelection": {
+              "envMode": "INHERIT"
+            },
+            "stopOnError": true,
+            "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    \n    try:\n        algos \u003d row[\"all_algos\"]\n        return len(algos.split(\u0027,\u0027))\n    except:\n        return \"no_algo\"",
+            "useKernel": false,
+            "column": "num_algos",
+            "sourceColumnsList": [],
+            "usePythonUnicode": true,
+            "vectorSize": 256,
+            "vectorize": false
+          },
+          "alwaysShowComment": false
+        },
+        {
+          "preview": false,
+          "metaType": "PROCESSOR",
+          "disabled": false,
+          "type": "ArrayUnfold",
+          "params": {
+            "countVal": true,
+            "overflowAction": "ERROR",
+            "column": "all_algos",
+            "limit": 100
+          },
+          "alwaysShowComment": false
+        },
+        {
+          "preview": false,
+          "metaType": "PROCESSOR",
+          "disabled": false,
+          "type": "ArrayFold",
+          "params": {
+            "column": "all_algos"
+          },
+          "alwaysShowComment": false
+        }
+      ],
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FillEmptyWithValue",
+      "params": {
+        "columns": [
+          "u\u0027CUSTOM_PYTHON_0\u0027",
+          "u\u0027CUSTOM_PYTHON_1\u0027",
+          "u\u0027decision_tree_classification\u0027",
+          "u\u0027neural_network\u0027",
+          "u\u0027svc_classifier\u0027",
+          "u\u0027logistic_regression\u0027",
+          "u\u0027knn\u0027",
+          "u\u0027xgboost\u0027",
+          "u\u0027lars_params\u0027",
+          "u\u0027sgd_classifier\u0027",
+          "u\u0027gbt_classification\u0027",
+          "u\u0027extra_trees\u0027",
+          "u\u0027random_forest_classification\u0027",
+          "u\u0027mllib_dt\u0027",
+          "u\u0027mllib_gbt\u0027",
+          "u\u0027mllib_logit\u0027",
+          "u\u0027mllib_rf\u0027",
+          "num_algos"
+        ],
+        "appliesTo": "COLUMNS",
+        "value": "0"
+      },
+      "alwaysShowComment": false
+    }
+  ],
+  "maxProcessedMemTableBytes": -1,
+  "previewMode": "ALL_ROWS",
+  "vizSampling": {
+    "_refreshTrigger": 0,
+    "autoRefreshSample": false
+  },
+  "analysisColumnData": {},
+  "sorting": [
+    {
+      "column": "u\u0027random_forest_classification\u0027",
+      "ascending": false
+    }
+  ],
+  "globalSearchQuery": "",
+  "coloring": {
+    "scheme": "MEANING_AND_STATUS",
+    "individualColumns": [],
+    "valueColoringMode": "HASH"
+  }
+}

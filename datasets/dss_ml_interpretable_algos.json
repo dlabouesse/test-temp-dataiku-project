@@ -1,0 +1,239 @@
+{
+  "type": "PostgreSQL",
+  "managed": true,
+  "checklists": {
+    "checklists": []
+  },
+  "checks": [],
+  "customMeta": {
+    "kv": {}
+  },
+  "flowOptions": {
+    "virtualizable": false,
+    "rebuildBehavior": "NORMAL",
+    "crossProjectBuildBehavior": "DEFAULT"
+  },
+  "readWriteOptions": {
+    "preserveOrder": false,
+    "writeBuckets": 1,
+    "forceSingleOutputFile": false,
+    "defaultReadOrdering": {
+      "enabled": false,
+      "rules": []
+    }
+  },
+  "partitioning": {
+    "ignoreNonMatchingFile": false,
+    "considerMissingRequestedPartitionsAsEmpty": false,
+    "dimensions": []
+  },
+  "versionTag": {
+    "versionNumber": 2,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574874865655
+  },
+  "creationTag": {
+    "versionNumber": 0,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574874800178
+  },
+  "tags": [],
+  "params": {
+    "writeWithCopyBadDataBehavior": "NOVERIFY_ERROR",
+    "connection": "PostgreSQL",
+    "notReadyIfEmpty": false,
+    "mode": "table",
+    "partitioningType": "custom",
+    "normalizeDoubles": true,
+    "table": "${projectKey}_dss_ml_interpretable_algos",
+    "tableCreationMode": "auto",
+    "writeInsertBatchSize": 10000,
+    "writeJDBCBadDataBehavior": "DISCARD_ROW",
+    "readColsWithUnknownTzAsDates": false,
+    "readSQLDateColsAsDSSDates": true
+  },
+  "schema": {
+    "columns": [
+      {
+        "name": "count",
+        "type": "bigint"
+      },
+      {
+        "name": "event_details_json_predictionType",
+        "type": "string"
+      },
+      {
+        "name": "event_details_json_guessPolicy",
+        "type": "string"
+      },
+      {
+        "name": "event_details_json_algorithms",
+        "type": "string"
+      },
+      {
+        "name": "original",
+        "type": "string"
+      },
+      {
+        "name": "all_algos",
+        "type": "string"
+      },
+      {
+        "name": "u\u0027logistic_regression\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027decision_tree_classification\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027xgboost\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027knn\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027lars_params\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027svc_classifier\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027neural_network\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027extra_trees\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027gbt_classification\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027random_forest_classification\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027mllib_gbt\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027mllib_dt\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027mllib_logit\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027mllib_rf\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027sgd_classifier\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "num_algos",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027CUSTOM_PYTHON_0\u0027",
+        "type": "bigint"
+      },
+      {
+        "name": "u\u0027CUSTOM_PYTHON_1\u0027",
+        "type": "bigint"
+      }
+    ],
+    "userModified": true
+  },
+  "metrics": {
+    "probes": [
+      {
+        "type": "basic",
+        "enabled": true,
+        "computeOnBuildMode": "PARTITION",
+        "meta": {
+          "name": "Basic data",
+          "level": 0
+        },
+        "configuration": {}
+      },
+      {
+        "type": "records",
+        "enabled": true,
+        "computeOnBuildMode": "NO",
+        "meta": {
+          "name": "Record count",
+          "level": 0
+        },
+        "configuration": {}
+      }
+    ],
+    "engineConfig": {
+      "padRunsWithMetrics": false,
+      "hive": {
+        "active": true,
+        "extraConf": []
+      },
+      "basic": {},
+      "dss": {
+        "active": true,
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "FULL",
+          "maxRecords": -1,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        }
+      },
+      "sql": {
+        "active": true
+      },
+      "impala": {
+        "active": true
+      },
+      "spark": {
+        "active": true,
+        "extraConf": []
+      },
+      "python": {}
+    },
+    "displayedState": {
+      "columns": [],
+      "metrics": [
+        "basic:COUNT_COLUMNS",
+        "records:COUNT_RECORDS"
+      ]
+    }
+  },
+  "metricsChecks": {
+    "runOnBuild": false,
+    "checks": [],
+    "displayedState": {
+      "checks": []
+    }
+  },
+  "customFields": {}
+}

@@ -1,0 +1,1833 @@
+{
+  "script": {
+    "steps": [],
+    "maxProcessedMemTableBytes": -1,
+    "fullSampleStatistics": {
+      "engineConfig": {
+        "padRunsWithMetrics": false,
+        "hive": {
+          "active": true,
+          "extraConf": []
+        },
+        "basic": {},
+        "dss": {
+          "active": true,
+          "selection": {
+            "useMemTable": false,
+            "filter": {
+              "distinct": false,
+              "enabled": false
+            },
+            "partitionSelectionMethod": "ALL",
+            "latestPartitionsN": 1,
+            "ordering": {
+              "enabled": false,
+              "rules": []
+            },
+            "samplingMethod": "FULL",
+            "maxRecords": -1,
+            "targetRatio": 0.02,
+            "withinFirstN": -1,
+            "maxReadUncompressedBytes": -1
+          }
+        },
+        "sql": {
+          "active": true
+        },
+        "impala": {
+          "active": true
+        },
+        "spark": {
+          "active": true,
+          "extraConf": []
+        },
+        "python": {}
+      },
+      "basic": true,
+      "countDistinct": true,
+      "advanced": true,
+      "percentile": false,
+      "validity": false,
+      "updateOnAnalyzeBoxOpen": false,
+      "computeCostFreeMetrics": false
+    },
+    "columnsSelection": {
+      "mode": "ALL"
+    },
+    "coloring": {
+      "scheme": "MEANING_AND_STATUS",
+      "individualColumns": [],
+      "valueColoringMode": "HASH"
+    },
+    "sorting": [
+      {
+        "column": "license_email",
+        "ascending": true
+      }
+    ],
+    "analysisColumnData": {},
+    "explorationSampling": {
+      "selection": {
+        "maxStoredBytes": -1,
+        "filter": {
+          "distinct": false,
+          "enabled": false
+        },
+        "partitionSelectionMethod": "ALL",
+        "latestPartitionsN": 1,
+        "ordering": {
+          "enabled": false,
+          "rules": []
+        },
+        "samplingMethod": "HEAD_SEQUENTIAL",
+        "maxRecords": 10000,
+        "targetRatio": 0.02,
+        "withinFirstN": -1,
+        "maxReadUncompressedBytes": -1
+      },
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "vizSampling": {
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "exploreUIParams": {
+      "autoRefresh": true
+    },
+    "globalSearchQuery": "",
+    "explorationFilters": [],
+    "previewMode": "ALL_ROWS"
+  },
+  "charts": [
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 3
+      },
+      "def": {
+        "type": "pie",
+        "variant": "normal",
+        "name": "Algos Cheese Repartition",
+        "userEditedName": true,
+        "genericDimension0": [
+          {
+            "column": "all_algos",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Count of records, descending"
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "function": "COUNT",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 200,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "thumbnailData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAEgUlEQVRoQ+WYW0gVQRjHZ46XFEILtE5air3YTbELqJGJFXm8QCVEVC9SD0LUU3R5CKSeMiIjTqIlUUEggWkPlZZlmSkVQRGkaGRiV7qQpp1Sz07M1mxz5uzuzM7uMcp98ZzdnW++3/z/3zdzhGCSXXCS8YIJA265OfdWctJOdb4VA3kgGkAFNb9y0QveX1GcF2oBQgbc2dnZSpIf8W1RPybP2aX+NQJmYUOxAI4Cl5eXa5Aej0fLXxY4FOo7Avzt6pPLEMAYnODh+/VankbQWOEoABXAWFrEznZVtw08sK+tNS53mpbrxe57gy8G38XiG6EAxnHtQEsD9+9tW+2C4AAhpaH1VKZtnf86Z9SvRITLKGzX5lLA7bVetVaTe9MDXKgHnZGR8dbtds/CL2Jo0rjWDKySsrTdxmYZmMCSiUWgibVDAWzV4raB8YTh45FjiX3zIlh7I4RQxYNL6hwYmra1Uwr/mhP6+iuKCkWaniXgoxuLtG0nK78gKD6tNrE3qWdWZWeBxRuZMDANS5Nm5RcgvMTkXlJvuvZFD5rY2mng7OT4N3U7MrfyVBYG7mh8pqrbcWGPbsystR4FQKgdFYnaNDSxNW5cTgFXrl+m5VOS7eYeTYWACSxLqgdPgxtBx8Q0+grfb54iuy3RkGxOPGhbwPRkLHxmfoEfAhBGti+sNK5novJ20GBpWzKDpPNwBNhbdku185ICN69E1Oc0PGluWG0CnZt7zV8KTkHIOVqKQgYmpewoyU7oMkqUq/DJstaLCKB4M9LFnpkKpOpXT3nc3Fz+iLHFc7IjH08fQZt80UgPeHfewu+zY6OjhFbW4CUzlbnARF2ZBKKmhvsX5MSptibKY8WXJqwEqVGKQoAhhMqxdUsDfhvLzEfG/DVgs6QTcj+NgZQc7bBiB9BK4+IqjKqrtMOG3aS6Kk+oIdqatoGy558BaD8JGjw99DZudwp1vC2FUU1VM0AgUiYTAkjGYlB8ee+cB08Ti1VgcjV4emWm0B1jCxhHFFW5+7hXQUjRrUUaFsdkgZ0ChwjVb1g+y2u0elxLmwF/uNc5/PHBw6lm0hBQoqwGiz9QCrMxZBV3ZB8mCvt9vqGe6tPqv3J4Fw2K363tqBv/PjYaHgDMgcaPrYI7AownfpY6T7h5sbC0ulaBrVgdulz1GzJnGNoZxxKytCiwHigL2+RePZwYFv2nDExsreciM8V56loCNoM2AmVhg9QVsLRR6bDgIrASwPNbAEDayQmFufx3r5Rq39nk8PbDXmp3pq+H50bBj2GpbY+u8ZAA0yqbqaqnLL4XGxY52u5eGwxn0dbsIsKDX7m/g8kY4RqmJ6nuO2LawPSU1bUzCWoD2AqsZUuLQk8UsFVYW8B4cA2qiUAvB6/TC2EE66jCCN6Gh4YOGjU0s/tSlmYDEotLweJgvi9+8OiCYfOj55NRNWC8zCoZjVl0dpFhbQd1ZzYIp47tgtpqWrxFSjubdgYBlEK/JwvsFGhIgdkFQTf284+lvxV2GjBoC+Op9b89d6Rp/UuLMumAfwLjav44OUn2rQAAAABJRU5ErkJggg\u003d\u003d",
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    },
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 2
+      },
+      "def": {
+        "type": "pie",
+        "variant": "normal",
+        "name": "Template Repartition",
+        "userEditedName": true,
+        "genericDimension0": [
+          {
+            "column": "event_details_json_guessPolicy",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Count of records, descending"
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "function": "COUNT",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "PERCENTAGE",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 200,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "thumbnailData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAACJklEQVRoQ+3Zv0vDQBQH8JcKYrX1Bzh0EOzSP0AnK10cFIcu1cF/QejkpFsdBOlf4OIm4mQRHCwodhG7uDk7KAhdpAiiYsGTq169xjS55L0LSWPH9lLu874vL1c1IGIvI2Je8B3MzrdqvMjpi1yn1vfl/IJfhfcFLJAySgbL7+vGawWzUrIGuaJleL3AfDEDaD2U80s6UtcGbmP5a2TyGWbWxsybtwOLtTrS1gLuYMXOLVJWAfPLqdHk4D9YvmsEmBpNCrbE9khZNWHq9iYDs+30ELCns56DxpRy+MFiSNmNVgntFkzV2iQJs53ROWixXcfHSN+AVdLl1Zhf/4DYwKD5pOVYKGkBdmrTJKwKlia2l5amaGs0mJWSBwAwpZzST1uHFlypN75PVABQqGbU3Lli148HtYt+V2HaGp2wDBZbSrzcvS5eLQ/bPaK8Joxtay1gGTp7u9mcfqxMdOHj42/p5l7cbbIUhxDtYBlVqGY+ASDWntLvR169qPO1r2BZuHFyEy0w13pFB25oqUYXObDXlEObcCjBx/XGpQG4v366aW1MurzA6CnNv8Tq8KF6H7tNuS/AbtCRAmOxZC1N0dYqKQcLfN04BQMSbu5d81q74UWBJU1Yd8qBBFOgrVKmwpInLFqU8jFFidUGxiYtUqbGagVj0SvZlJb/GZOctJwms5sW1wUVe/QF7HRvM4DD1Wxq36lwFJ/7CqbYMPY7/sHYCgb9+i8x8/UpfXiiFgAAAABJRU5ErkJggg\u003d\u003d",
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    },
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 2
+      },
+      "def": {
+        "type": "stacked_columns",
+        "variant": "normal",
+        "name": "Average Number of Algos Ran by Template ",
+        "userEditedName": true,
+        "genericDimension0": [
+          {
+            "column": "event_details_json_guessPolicy",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "NATURAL",
+              "label": "Natural ordering",
+              "sortAscending": true
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [
+          {
+            "column": "event_details_json_predictionType",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Average of num_algos, descending"
+            }
+          }
+        ],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "column": "num_algos",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 272,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    },
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 2
+      },
+      "def": {
+        "type": "stacked_columns",
+        "variant": "stacked_100",
+        "name": "Algorithms Selected by Template Filtered by Task",
+        "userEditedName": true,
+        "genericDimension0": [
+          {
+            "column": "event_details_json_guessPolicy",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of u\u0027logistic_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of u\u0027logistic_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 1,
+                "label": "Average of u\u0027lars_params\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 1,
+                "label": "Average of u\u0027lars_params\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 2,
+                "label": "Average of u\u0027svc_classifier\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 2,
+                "label": "Average of u\u0027svc_classifier\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 3,
+                "label": "Average of u\u0027lasso_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 3,
+                "label": "Average of u\u0027lasso_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 4,
+                "label": "Average of u\u0027sgd_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 4,
+                "label": "Average of u\u0027sgd_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 5,
+                "label": "Average of u\u0027svm_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 5,
+                "label": "Average of u\u0027svm_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 6,
+                "label": "Average of u\u0027ridge_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 6,
+                "label": "Average of u\u0027ridge_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 7,
+                "label": "Average of u\u0027decision_tree_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 7,
+                "label": "Average of u\u0027decision_tree_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 8,
+                "label": "Average of u\u0027leastsquare_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 8,
+                "label": "Average of u\u0027leastsquare_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 9,
+                "label": "Average of u\u0027knn\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 9,
+                "label": "Average of u\u0027knn\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 10,
+                "label": "Average of u\u0027random_forest_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 10,
+                "label": "Average of u\u0027random_forest_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 11,
+                "label": "Average of u\u0027gbt_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 11,
+                "label": "Average of u\u0027gbt_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 12,
+                "label": "Average of u\u0027decision_tree_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 12,
+                "label": "Average of u\u0027decision_tree_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 13,
+                "label": "Average of u\u0027xgboost\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 13,
+                "label": "Average of u\u0027xgboost\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 14,
+                "label": "Average of u\u0027gbt_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 14,
+                "label": "Average of u\u0027gbt_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 15,
+                "label": "Average of u\u0027neural_network\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 15,
+                "label": "Average of u\u0027neural_network\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 16,
+                "label": "Average of u\u0027gbt_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 16,
+                "label": "Average of u\u0027gbt_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 17,
+                "label": "Average of u\u0027sgd_classifier\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 17,
+                "label": "Average of u\u0027sgd_classifier\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 18,
+                "label": "Average of u\u0027CustomPyPredAlgo_mymodel_mymodel_prediction-algo\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 18,
+                "label": "Average of u\u0027CustomPyPredAlgo_mymodel_mymodel_prediction-algo\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 19,
+                "label": "Average of u\u0027extra_trees\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 19,
+                "label": "Average of u\u0027extra_trees\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 20,
+                "label": "Average of u\u0027CUSTOM_PYTHON_0\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 20,
+                "label": "Average of u\u0027CUSTOM_PYTHON_0\u0027, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "NATURAL",
+              "label": "Natural ordering",
+              "sortAscending": true
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [
+          {
+            "column": "event_details_json_predictionType",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of u\u0027logistic_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of u\u0027logistic_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 1,
+                "label": "Average of u\u0027lars_params\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 1,
+                "label": "Average of u\u0027lars_params\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 2,
+                "label": "Average of u\u0027svc_classifier\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 2,
+                "label": "Average of u\u0027svc_classifier\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 3,
+                "label": "Average of u\u0027lasso_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 3,
+                "label": "Average of u\u0027lasso_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 4,
+                "label": "Average of u\u0027sgd_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 4,
+                "label": "Average of u\u0027sgd_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 5,
+                "label": "Average of u\u0027svm_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 5,
+                "label": "Average of u\u0027svm_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 6,
+                "label": "Average of u\u0027ridge_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 6,
+                "label": "Average of u\u0027ridge_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 7,
+                "label": "Average of u\u0027decision_tree_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 7,
+                "label": "Average of u\u0027decision_tree_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 8,
+                "label": "Average of u\u0027leastsquare_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 8,
+                "label": "Average of u\u0027leastsquare_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 9,
+                "label": "Average of u\u0027knn\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 9,
+                "label": "Average of u\u0027knn\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 10,
+                "label": "Average of u\u0027random_forest_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 10,
+                "label": "Average of u\u0027random_forest_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 11,
+                "label": "Average of u\u0027gbt_regression\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 11,
+                "label": "Average of u\u0027gbt_regression\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 12,
+                "label": "Average of u\u0027decision_tree_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 12,
+                "label": "Average of u\u0027decision_tree_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 13,
+                "label": "Average of u\u0027xgboost\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 13,
+                "label": "Average of u\u0027xgboost\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 14,
+                "label": "Average of u\u0027gbt_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 14,
+                "label": "Average of u\u0027gbt_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 15,
+                "label": "Average of u\u0027neural_network\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 15,
+                "label": "Average of u\u0027neural_network\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 16,
+                "label": "Average of u\u0027gbt_classification\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 16,
+                "label": "Average of u\u0027gbt_classification\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 17,
+                "label": "Average of u\u0027sgd_classifier\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 17,
+                "label": "Average of u\u0027sgd_classifier\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 18,
+                "label": "Average of u\u0027CustomPyPredAlgo_mymodel_mymodel_prediction-algo\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 18,
+                "label": "Average of u\u0027CustomPyPredAlgo_mymodel_mymodel_prediction-algo\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 19,
+                "label": "Average of u\u0027extra_trees\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 19,
+                "label": "Average of u\u0027extra_trees\u0027, ascending",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 20,
+                "label": "Average of u\u0027CUSTOM_PYTHON_0\u0027, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 20,
+                "label": "Average of u\u0027CUSTOM_PYTHON_0\u0027, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Average of u\u0027logistic_regression\u0027, descending"
+            }
+          }
+        ],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "column": "u\u0027logistic_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027lars_params\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027svc_classifier\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027lasso_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027sgd_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027svm_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027ridge_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027decision_tree_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027leastsquare_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027knn\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027random_forest_classification\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027gbt_regression\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027decision_tree_classification\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027xgboost\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027gbt_classification\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027neural_network\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027gbt_classification\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027sgd_classifier\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027CustomPyPredAlgo_mymodel_mymodel_prediction-algo\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027extra_trees\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          },
+          {
+            "column": "u\u0027CUSTOM_PYTHON_0\u0027",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 272,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    },
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 2
+      },
+      "def": {
+        "type": "pie",
+        "variant": "donut",
+        "name": "Avg. of num_algos by license_email",
+        "userEditedName": false,
+        "genericDimension0": [
+          {
+            "column": "license_email",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Average of num_algos, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Average of num_algos, descending"
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "column": "num_algos",
+            "function": "AVG",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 200,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "thumbnailData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAEEElEQVRoQ+3ZW0gUURgH8HO8JdJD9KCG91KwQtOK8hbkDQqTTOmh8iEzwdp8MChNCC0SFUOjNBEDMYge68U0MW9h+hCJImguZKKWSoro2i7tZeKsnunM2VnXnTmjSzpPOjv77fnN/zvfsCwE2+yA28wLNh2ccOZhj3ZZa/yUVMPfa/hgOX6zbrzi4MbxcXdOv6uFBDVkPQMkGL8WqHsNJirOKYpXFOzVMdBZ5utlEd56YHyxUnBFwAhKKmn0RsDo/UYXLnOqNHWaZbszB9NYtNiNgFE700d12nHAAWDIiPZOZoVmClarq8zJxk1abkMSLZYwDa48f0znAqE7qsdxoC8jxruIBZoZWK2uygYAZOJF0Wh7wShd8kiP9mYyzFiCBfu2bnH/4qvlgD140euB6XRpLK7BAs0EjFuZbjmxlLNC9p0WXNfxSB3YFskPporUo7/dnJ086FoXNE/Mp2ByuaykmYDbO4LM6Qb45VlsM4yeiY8QQkU2ZGBhc5dYuhjrEGCMxesXQwcH59vE4ve/6Z/twn+naGr/uAG9m+DeQKiBSWWpUgeY7IRpMA23B0uiyVRpnJy2VgyMFpkY/23DyQr39f1uYDJw1lLcMnBfX1+nVpu3YALze8UWJxmMirXf41sb/btkMuhif7aan8vDV4clDy5ZCSMwDV3RXjaf8ve77h0SXBQqda8h8JxRp0+caXcVqyEVzRyMFxcVFSWtndcKcBwHwl+GC1Im4f8dGOHCmsJ2wDjlLUm4uLjYYg/jBZWUlMhqaVSn/nul1YRzg+5KGlyy9vAOmJgqOTk5ET4+PvyXB3un9XrpoloOkzCE0FBwIt0FLcr9bJjkth4JPWhu557Wa5b3ysTdyT1Q8Nnem4iul9XSqABu68KTGRafLxW81NLyYzr/9hhdEOOlpssErH03ZHVw/epeBL7lp+xOGadrLcFDX0clDSxFwQiLD7vQ9XXmVjbqtJqxuobdYugtBaMF0SmTWPT6RMgQiM1W2U56DUsiR6qfCsxysEwSpsE0FoPxqsXgtbmd/PNWFTlqESqJdggwRtvCajUa42DvR2d0fcyVSh72pWVGgLSGlotlljAqNFnQ/QEA6ESuHLUyefS///eLCwkebJvVG40c/61IDAxzb0oeVOQaZD+WyGKTBT2Cib1RMKphK2WHBK8mvYqmseictYTFwEc8F+bifOY8zW3IKF2mLS2YrKVvm+a9pvyttTO9h8XA6JwqYsQAb6iY/cyiGBgV7mxsdHc1rvCblkxXDMxxnGmgdZafAbfqE5jsWXrkM93DFs8TAEDvi5pmDgAPW2CcMnSGl1TP44VjW6ywxHOKg8l1Pb6Ywg81ckoDwPXEpB0ulmiw622bCrZrZQpdvANW6MY6TNm/FE7BOMFB2csAAAAASUVORK5CYII\u003d",
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    },
+    {
+      "copySelectionFromScript": false,
+      "engineType": "SQL",
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 2
+      },
+      "def": {
+        "type": "pie",
+        "variant": "donut",
+        "name": "Prediction Task Repartition",
+        "userEditedName": true,
+        "genericDimension0": [
+          {
+            "column": "event_details_json_predictionType",
+            "type": "ALPHANUM",
+            "numParams": {
+              "emptyBinsMode": "ZEROS"
+            },
+            "maxValues": 20,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "AGGREGATION",
+              "measureIdx": 0,
+              "label": "Count of records, descending"
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "function": "COUNT",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "PERCENTAGE",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 200,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "thumbnailData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAACFUlEQVRoQ+3Xv0vDQBQH8At1EMXByUl0cRcHcRLdHCrSf0Rx0k1xs+Ck/g2FQouIoqIQh0IXQaJ/gISiVAergkVEjJxw4RqT+9F7L6kkHZtwvc9937u7WiRlHytlXhI72NsYsukij3+U/LV2t/PzcS18LGCG5FE8mP8eG48KDoMyXBSYPceCo4FF2GBJR5UzBhoFLMOqgul70GhwsApWBwyNBgWrYnXBkGgwsA62GzDxvIpbXNwzPb7iB6/cTpPhsQE28cmt89pL+/NLBQLRzyBgpXQ33+ZEqOXS9c2h8/Asg5uiQcDVetMunE5Ez1WC7biQrB9fitCJg6v1pzVCvhfYJP/ANbB0DKfx2lrarzlYZ7NxwjTdsMn5cE3w74aGmDIamE68MDMi7FtR6YrQJmWdgWW7ZPB5VEmnLmGTcpb1cWIlbd95/a3m40nopmXQvz0LLpfLub7R2YvUgCk062EubpM+zo4lbiET27RkJd3t0fRvb1oYYJN06XyMb1rQKWOmGxtYNWkZlo7TEwmrpOz/fQy5kKhAIbBgCeuAGXz14Er32m6cLihYF60LNi1ltrogmxYflejmxb+nA4bCgidMB6zU76csktuR1asqGBKLAmZQWdIqYGgsKljW0zIwBhYdTH/gzGkOvrfJUbDEo8BYULRNS9S7fJl3gD2y6xbzVVnfQzwH36UhJoU5RgbGXN1eGPsHyY0dODQiLwYAAAAASUVORK5CYII\u003d",
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      },
+      "maxDataBytes": 157286400
+    }
+  ]
+}

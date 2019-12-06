@@ -1,0 +1,746 @@
+{
+  "inputDatasetSmartName": "WT1.dss_ml_events",
+  "script": {
+    "steps": [
+      {
+        "type": "JSONFlattener",
+        "params": {
+          "inCol": "event_details_json",
+          "maxDepth": 1,
+          "flattenArrays": false,
+          "prefixOutputs": true,
+          "separator": "_",
+          "nullAsEmpty": true
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "LongTailGrouper",
+        "params": {
+          "column": "event_type",
+          "replace": "Others",
+          "toKeep": [
+            "prediction-train",
+            "stop-grid-search-model",
+            "start-retrain-model",
+            ""
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FilterOnValue",
+        "params": {
+          "values": [
+            "Others"
+          ],
+          "matchingMode": "FULL_STRING",
+          "normalizationMode": "EXACT",
+          "action": "REMOVE_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_type"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "JSONFlattener",
+        "params": {
+          "inCol": "event_details_json",
+          "maxDepth": 1,
+          "flattenArrays": false,
+          "prefixOutputs": true,
+          "separator": "_",
+          "nullAsEmpty": true
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FilterOnValue",
+        "params": {
+          "values": [
+            "[object Object]"
+          ],
+          "matchingMode": "FULL_STRING",
+          "normalizationMode": "EXACT",
+          "action": "REMOVE_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_algorithms"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "RemoveRowsOnEmpty",
+        "params": {
+          "keep": false,
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_algorithms"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FilterOnValue",
+        "params": {
+          "values": [
+            "PY_MEMORY"
+          ],
+          "matchingMode": "FULL_STRING",
+          "normalizationMode": "EXACT",
+          "action": "KEEP_ROW",
+          "booleanMode": "AND",
+          "appliesTo": "SINGLE_COLUMN",
+          "columns": [
+            "event_details_json_backendType"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      },
+      {
+        "type": "ColumnsSelector",
+        "params": {
+          "keep": false,
+          "appliesTo": "COLUMNS",
+          "columns": [
+            "event_details_json_feature_selection_params",
+            "event_details_json_outliers",
+            "event_details_json_hasSessionName",
+            "event_details_json_feature_generation",
+            "event_details_json_weightMethod",
+            "event_details_json_calibrationMethod",
+            "event_details_json_reduce",
+            "event_details_json_hasTimeOrdering",
+            "event_details_json_nbModelsPreGS",
+            "event_details_json_exportType",
+            "event_details_json_edssUser",
+            "event_details_json",
+            "event_details_json_backendType",
+            "event_details_json_userProfile",
+            "event_details_json_taskType",
+            "event_details_json_type",
+            "state",
+            "event_details",
+            "event_details_json_hasSessionDescription"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      }
+    ],
+    "maxProcessedMemTableBytes": -1,
+    "columnsSelection": {
+      "mode": "ALL"
+    },
+    "coloring": {
+      "scheme": "MEANING_AND_STATUS",
+      "individualColumns": [],
+      "valueColoringMode": "HASH"
+    },
+    "sorting": [],
+    "analysisColumnData": {},
+    "explorationSampling": {
+      "selection": {
+        "maxStoredBytes": -1,
+        "filter": {
+          "distinct": false,
+          "enabled": false
+        },
+        "partitionSelectionMethod": "SELECTED",
+        "selectedPartitions": [
+          "2019-11-14",
+          "2019-11-13",
+          "2019-11-12",
+          "2019-11-11",
+          "2019-11-10",
+          "2019-11-09",
+          "2019-11-08",
+          "2019-11-07",
+          "2019-11-06",
+          "2019-11-05",
+          "2019-11-04",
+          "2019-11-03",
+          "2019-11-02",
+          "2019-11-01",
+          "2019-10-31",
+          "2019-10-30",
+          "2019-10-29",
+          "2019-10-28",
+          "2019-10-27",
+          "2019-10-26",
+          "2019-10-25",
+          "2019-10-24",
+          "2019-10-23",
+          "2019-10-22",
+          "2019-10-21",
+          "2019-10-20",
+          "2019-10-19",
+          "2019-10-18",
+          "2019-10-17",
+          "2019-10-16",
+          "2019-10-15",
+          "2019-10-14",
+          "2019-10-13",
+          "2019-10-12",
+          "2019-10-11",
+          "2019-10-10",
+          "2019-10-09",
+          "2019-10-08",
+          "2019-10-07",
+          "2019-10-06",
+          "2019-10-05",
+          "2019-10-04",
+          "2019-10-03",
+          "2019-10-02",
+          "2019-10-01",
+          "2019-09-30",
+          "2019-09-29",
+          "2019-09-28",
+          "2019-09-27",
+          "2019-09-26",
+          "2019-09-25",
+          "2019-09-24",
+          "2019-09-23",
+          "2019-09-22",
+          "2019-09-21",
+          "2019-09-20",
+          "2019-09-19",
+          "2019-09-18",
+          "2019-09-17",
+          "2019-09-16",
+          "2019-09-15",
+          "2019-09-14",
+          "2019-09-13",
+          "2019-09-12",
+          "2019-09-11",
+          "2019-09-10",
+          "2019-09-09",
+          "2019-09-08",
+          "2019-09-07",
+          "2019-09-06",
+          "2019-09-05",
+          "2019-09-04",
+          "2019-09-03",
+          "2019-09-02",
+          "2019-09-01",
+          "2019-08-31",
+          "2019-08-30",
+          "2019-08-29",
+          "2019-08-28",
+          "2019-08-27",
+          "2019-08-26",
+          "2019-08-25",
+          "2019-08-24",
+          "2019-08-23",
+          "2019-08-22",
+          "2019-08-21",
+          "2019-08-20",
+          "2019-08-19",
+          "2019-08-18",
+          "2019-08-17",
+          "2019-08-16",
+          "2019-08-15",
+          "2019-08-14",
+          "2019-08-13",
+          "2019-08-12",
+          "2019-08-11",
+          "2019-08-10",
+          "2019-08-09",
+          "2019-08-08",
+          "2019-08-07",
+          "2019-08-06",
+          "2019-08-05",
+          "2019-08-04",
+          "2019-08-03",
+          "2019-08-02",
+          "2019-08-01",
+          "2019-07-31",
+          "2019-07-30",
+          "2019-07-29",
+          "2019-07-28",
+          "2019-07-27",
+          "2019-07-26",
+          "2019-07-25",
+          "2019-07-24",
+          "2019-07-23",
+          "2019-07-22",
+          "2019-07-21",
+          "2019-07-20",
+          "2019-07-19",
+          "2019-07-18",
+          "2019-07-17",
+          "2019-07-16",
+          "2019-07-15",
+          "2019-07-14",
+          "2019-07-13",
+          "2019-07-12",
+          "2019-07-11",
+          "2019-07-10",
+          "2019-07-09",
+          "2019-07-08",
+          "2019-07-07",
+          "2019-07-06",
+          "2019-07-05",
+          "2019-07-04",
+          "2019-07-03",
+          "2019-07-02",
+          "2019-07-01",
+          "2019-06-30",
+          "2019-06-29",
+          "2019-06-28",
+          "2019-06-27",
+          "2019-06-26",
+          "2019-06-25",
+          "2019-06-24",
+          "2019-06-23",
+          "2019-06-21",
+          "2019-06-20",
+          "2019-06-19",
+          "2019-06-18",
+          "2019-06-17",
+          "2019-06-16",
+          "2019-06-15",
+          "2019-06-14",
+          "2019-06-13",
+          "2019-06-12",
+          "2019-06-11",
+          "2019-06-10",
+          "2019-06-09",
+          "2019-06-07",
+          "2019-06-06",
+          "2019-06-05",
+          "2019-06-04",
+          "2019-06-03",
+          "2019-06-02",
+          "2019-06-01",
+          "2019-05-31",
+          "2019-05-30",
+          "2019-05-29",
+          "2019-05-28",
+          "2019-05-27",
+          "2019-05-26",
+          "2019-05-25",
+          "2019-05-24",
+          "2019-05-23",
+          "2019-05-22",
+          "2019-05-21",
+          "2019-05-20",
+          "2019-05-19",
+          "2019-05-18",
+          "2019-05-17",
+          "2019-05-16",
+          "2019-05-15",
+          "2019-05-14",
+          "2019-05-13",
+          "2019-05-12",
+          "2019-05-11",
+          "2019-05-10",
+          "2019-05-09",
+          "2019-05-08",
+          "2019-05-07",
+          "2019-05-06",
+          "2019-05-05",
+          "2019-05-04",
+          "2019-05-03",
+          "2019-05-02",
+          "2019-05-01",
+          "2019-04-30",
+          "2019-04-29",
+          "2019-04-28",
+          "2019-04-27",
+          "2019-04-26",
+          "2019-04-25",
+          "2019-04-24",
+          "2019-04-23",
+          "2019-04-22",
+          "2019-04-21",
+          "2019-04-20",
+          "2019-04-19",
+          "2019-04-18",
+          "2019-04-17",
+          "2019-04-16",
+          "2019-04-15",
+          "2019-04-14",
+          "2019-04-13",
+          "2019-04-12",
+          "2019-04-11",
+          "2019-04-10",
+          "2019-04-09",
+          "2019-04-08",
+          "2019-04-07",
+          "2019-04-06",
+          "2019-04-05",
+          "2019-04-04",
+          "2019-04-03",
+          "2019-04-02",
+          "2019-04-01",
+          "2019-03-31",
+          "2019-03-30",
+          "2019-03-29",
+          "2019-03-28",
+          "2019-03-27",
+          "2019-03-26",
+          "2019-03-25",
+          "2019-03-24",
+          "2019-03-23",
+          "2019-03-22",
+          "2019-03-21",
+          "2019-03-20",
+          "2019-03-19",
+          "2019-03-18",
+          "2019-03-17",
+          "2019-03-16",
+          "2019-03-15",
+          "2019-03-14",
+          "2019-03-13",
+          "2019-03-12",
+          "2019-03-11",
+          "2019-03-10",
+          "2019-03-09",
+          "2019-03-08",
+          "2019-03-07",
+          "2019-03-06",
+          "2019-03-05",
+          "2019-03-04",
+          "2019-03-03",
+          "2019-03-02",
+          "2019-03-01",
+          "2019-02-28",
+          "2019-02-27",
+          "2019-02-26",
+          "2019-02-25",
+          "2019-02-24",
+          "2019-02-23",
+          "2019-02-22",
+          "2019-02-21",
+          "2019-02-20",
+          "2019-02-19",
+          "2019-02-18",
+          "2019-02-17",
+          "2019-02-16",
+          "2019-02-15",
+          "2019-02-14",
+          "2019-02-13",
+          "2019-02-12",
+          "2019-02-11",
+          "2019-02-10",
+          "2019-02-09",
+          "2019-02-08",
+          "2019-02-07",
+          "2019-02-06",
+          "2019-02-05",
+          "2019-02-04",
+          "2019-02-03",
+          "2019-02-02",
+          "2019-02-01",
+          "2019-01-31",
+          "2019-01-30",
+          "2019-01-29",
+          "2019-01-28",
+          "2019-01-27",
+          "2019-01-26",
+          "2019-01-25",
+          "2019-01-24",
+          "2019-01-23",
+          "2019-01-22",
+          "2019-01-21",
+          "2019-01-20",
+          "2019-01-19",
+          "2019-01-18",
+          "2019-01-17",
+          "2019-01-16",
+          "2019-01-15",
+          "2019-01-14",
+          "2019-01-13",
+          "2019-01-12",
+          "2019-01-11",
+          "2019-01-10",
+          "2019-01-09",
+          "2019-01-08",
+          "2019-01-07",
+          "2019-01-06",
+          "2019-01-05",
+          "2019-01-04",
+          "2019-01-03",
+          "2019-01-02",
+          "2019-01-01"
+        ],
+        "latestPartitionsN": 1,
+        "ordering": {
+          "enabled": false,
+          "rules": []
+        },
+        "samplingMethod": "HEAD_SEQUENTIAL",
+        "maxRecords": 10000,
+        "targetRatio": 0.02,
+        "withinFirstN": -1,
+        "maxReadUncompressedBytes": -1
+      },
+      "autoRefreshSample": false,
+      "_refreshTrigger": 2
+    },
+    "vizSampling": {
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "exploreUIParams": {
+      "autoRefresh": true
+    },
+    "globalSearchQuery": "",
+    "explorationFilters": [
+      {
+        "column": "event_details_json_guessPolicy",
+        "type": "columnFilter",
+        "currentMode": "FACET",
+        "active": true,
+        "facet": {
+          "type": "facet",
+          "column": "event_details_json_guessPolicy",
+          "columnType": "ALPHANUM",
+          "currentMode": "ALPHANUM",
+          "sort": "count",
+          "selectedValues": {
+            "DEFAULT": true
+          }
+        },
+        "alphanumFilter": {
+          "type": "alphanum",
+          "column": "event_details_json_guessPolicy",
+          "values": [],
+          "params": {
+            "mode": "full_string",
+            "normalization": "exact"
+          }
+        },
+        "validityFilter": {
+          "type": "validity",
+          "column": "event_details_json_guessPolicy",
+          "params": {
+            "type": "Text",
+            "ok": true,
+            "nok": true,
+            "empty": true
+          }
+        },
+        "$$hashKey": "object:3165"
+      }
+    ],
+    "previewMode": "ALL_ROWS"
+  },
+  "charts": [
+    {
+      "copySelectionFromScript": false,
+      "refreshableSelection": {
+        "selection": {
+          "useMemTable": false,
+          "filter": {
+            "distinct": false,
+            "enabled": false
+          },
+          "partitionSelectionMethod": "ALL",
+          "latestPartitionsN": 1,
+          "ordering": {
+            "enabled": false,
+            "rules": []
+          },
+          "samplingMethod": "HEAD_SEQUENTIAL",
+          "maxRecords": 10000,
+          "targetRatio": 0.02,
+          "withinFirstN": -1,
+          "maxReadUncompressedBytes": -1
+        },
+        "autoRefreshSample": false,
+        "_refreshTrigger": 1
+      },
+      "def": {
+        "type": "grouped_columns",
+        "variant": "normal",
+        "name": "Count by timestamp",
+        "userEditedName": false,
+        "genericDimension0": [
+          {
+            "column": "timestamp",
+            "type": "DATE",
+            "numParams": {
+              "emptyBinsMode": "AVERAGE"
+            },
+            "dateParams": {
+              "mode": "AUTOMATIC"
+            },
+            "maxValues": 0,
+            "generateOthersCategory": true,
+            "oneTickPerBin": false,
+            "filters": [],
+            "isA": "dimension",
+            "possibleSorts": [
+              {
+                "type": "NATURAL",
+                "label": "Natural ordering",
+                "sortAscending": true
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, descending"
+              },
+              {
+                "type": "AGGREGATION",
+                "measureIdx": 0,
+                "label": "Count of records, ascending",
+                "sortAscending": true
+              }
+            ],
+            "sort": {
+              "type": "NATURAL",
+              "label": "Natural ordering",
+              "sortAscending": true
+            }
+          }
+        ],
+        "genericDimension1": [],
+        "facetDimension": [],
+        "animationDimension": [],
+        "genericMeasures": [
+          {
+            "function": "COUNT",
+            "type": "NUMERICAL",
+            "displayed": true,
+            "isA": "measure",
+            "displayAxis": "axis1",
+            "displayType": "column",
+            "computeMode": "NORMAL",
+            "computeModeDim": 0
+          }
+        ],
+        "xDimension": [],
+        "yDimension": [],
+        "uaXDimension": [],
+        "uaYDimension": [],
+        "uaSize": [],
+        "uaShape": [],
+        "uaColor": [],
+        "uaTooltip": [],
+        "groupDimension": [],
+        "xMeasure": [],
+        "yMeasure": [],
+        "colorMeasure": [],
+        "sizeMeasure": [],
+        "geometry": [],
+        "tooltipMeasures": [],
+        "boxplotBreakdownDim": [],
+        "boxplotValue": [],
+        "filters": [],
+        "axis1LogScale": false,
+        "axis2LogScale": false,
+        "includeZero": true,
+        "smoothing": true,
+        "showLegend": true,
+        "showXAxis": false,
+        "showInChartValues": false,
+        "showInChartLabels": true,
+        "strokeWidth": 1,
+        "fillOpacity": 0.6,
+        "showXAxisLabel": true,
+        "showYAxisLabel": true,
+        "hexbinRadius": 20,
+        "hexbinNumber": 20,
+        "hexbinRadiusMode": "NUM_HEXAGONS",
+        "chartHeight": 200,
+        "singleXAxis": true,
+        "multiTooltips": false,
+        "animationFrameDuration": 3000,
+        "animationRepeat": true,
+        "colorOptions": {
+          "singleColor": "#2678B1",
+          "transparency": 0.75,
+          "colorPalette": "default",
+          "ccScaleMode": "NORMAL",
+          "customPalette": {
+            "id": "__dku_custom__",
+            "name": "Custom Palette",
+            "colors": [],
+            "values": [],
+            "fixedValues": false
+          },
+          "paletteType": "CONTINUOUS",
+          "quantizationMode": "NONE",
+          "numQuantizeSteps": 5,
+          "paletteMiddleValue": 0.0
+        },
+        "bubblesOptions": {
+          "defaultRadius": 5.0,
+          "singleShape": "FILLED_CIRCLE"
+        },
+        "computeMode": "NORMAL",
+        "xAxisMode": "NORMAL",
+        "yAxisMode": "NORMAL",
+        "pieOptions": {
+          "donutHoleSize": 54.0
+        },
+        "scatterOptions": {
+          "equalScales": false,
+          "identityLine": false
+        },
+        "mapOptions": {
+          "tilesLayer": "cartodb-positron",
+          "lockSquareGrid": false
+        },
+        "mapGridOptions": {
+          "gridLonDeg": 0.5,
+          "gridLatDeg": 0.5
+        },
+        "disableSafetyLimits": false,
+        "useLiveProcessingIfAvailable": true,
+        "legendPlacement": "OUTER_RIGHT"
+      }
+    }
+  ],
+  "name": "Analyze WT1.dss_ml_events",
+  "versionTag": {
+    "versionNumber": 5,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1573823283677
+  },
+  "creationTag": {
+    "versionNumber": 0,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1573813056921
+  },
+  "tags": [],
+  "customFields": {},
+  "checklists": {
+    "checklists": []
+  }
+}

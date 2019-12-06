@@ -1,0 +1,224 @@
+{
+  "columnsSelection": {
+    "mode": "ALL"
+  },
+  "explorationSampling": {
+    "_refreshTrigger": 0,
+    "selection": {
+      "filter": {
+        "distinct": false,
+        "enabled": false
+      },
+      "latestPartitionsN": 1,
+      "maxRecords": 10000,
+      "ordering": {
+        "rules": [],
+        "enabled": false
+      },
+      "withinFirstN": -1,
+      "partitionSelectionMethod": "ALL",
+      "maxStoredBytes": -1,
+      "targetRatio": 0.02,
+      "maxReadUncompressedBytes": -1,
+      "samplingMethod": "HEAD_SEQUENTIAL"
+    },
+    "autoRefreshSample": false
+  },
+  "explorationFilters": [],
+  "origin": "PREPARE_RECIPE",
+  "exploreUIParams": {
+    "autoRefresh": true
+  },
+  "steps": [
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_algorithms"
+        ],
+        "values": [
+          "{\"CUSTOM_PYTHON_0\":{\"enabled\":true,\"name\":\"Custom Python model\",\"code\":\"\\\"CatBoost\\\"\\n\\nfrom catboost import CatBoostClassifier\\n\\nclf \u003d CatBoostClassifier(\\n    iterations\u003d100,\\n    learning_rate\u003d0.5,\\n    early_stopping_rounds\u003d20\\n)\\n\"}}",
+          "{\"CUSTOM_PYTHON_1\":{\"enabled\":true,\"name\":\"Custom Python model\",\"code\":\"\\\"XGBoost\\\"\\n\\nimport xgboost as xgb\\nclf \u003d  xgb.XGBClassifier(\\n    gamma\u003d0,\\n    max_depth\u003d6,\\n    min_child_weight\u003d1\\n    )\\n\\n\"}}"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "REMOVE_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_guessPolicy"
+        ],
+        "values": [
+          "DEFAULT"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "KEEP_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnReorder",
+      "params": {
+        "referenceColumn": "event_details_json_algorithms",
+        "columns": [
+          "event_details_json_guessPolicy"
+        ],
+        "reorderAction": "BEFORE_COLUMN",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnReorder",
+      "params": {
+        "columns": [
+          "count"
+        ],
+        "reorderAction": "AT_START",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnRenamer",
+      "params": {
+        "renamings": [
+          {
+            "from": "event_details_json_algorithms",
+            "to": "algos"
+          }
+        ]
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "FilterOnValue",
+      "params": {
+        "normalizationMode": "EXACT",
+        "booleanMode": "AND",
+        "columns": [
+          "event_details_json_predictionType"
+        ],
+        "values": [
+          "BINARY_CLASSIFICATION"
+        ],
+        "matchingMode": "FULL_STRING",
+        "action": "KEEP_ROW",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": true,
+      "type": "JSONFlattener",
+      "params": {
+        "maxDepth": 2,
+        "inCol": "algos",
+        "nullAsEmpty": true,
+        "prefixOutputs": false,
+        "flattenArrays": false,
+        "separator": "_"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnRenamer",
+      "params": {
+        "renamings": [
+          {
+            "from": "event_details_json_predictionType",
+            "to": "predictionType"
+          }
+        ]
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": false,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "ColumnReorder",
+      "params": {
+        "referenceColumn": "event_details_json_guessPolicy",
+        "columns": [
+          "predictionType"
+        ],
+        "reorderAction": "BEFORE_COLUMN",
+        "appliesTo": "SINGLE_COLUMN"
+      },
+      "alwaysShowComment": false
+    },
+    {
+      "preview": true,
+      "metaType": "PROCESSOR",
+      "disabled": false,
+      "type": "PythonUDF",
+      "params": {
+        "mode": "CELL",
+        "envSelection": {
+          "envMode": "INHERIT"
+        },
+        "stopOnError": true,
+        "pythonSourceCode": "def process(row):\n    try:\n        rf \u003d row[\"algos\"]\n        if len(rf) \u003e0:\n            for x in range(7,30):\n                original \u003d \u0027{\"random_forest_classification\":{\"enabled\":true,\"n_estimators\":[100],\"n_jobs\":4,\"max_tree_depth\":[6,%s],\"min_samples_leaf\":[1],\"selection_mode\":\"auto\",\"max_features\":[0],\"max_feature_prop\":0.3},\"logistic_regression\":{\"enabled\":true,\"multi_class\":\"ovr\",\"l1\":false,\"l2\":true,\"C\":[0.01,0.1,1,10,100],\"n_jobs\":2}}\u0027% x\n              \n                if rf \u003d\u003d original:\n                    return 1\n            else:\n                return 0\n            \n    except:\n        return \u0027\u0027",
+        "useKernel": false,
+        "column": "original_tempalte",
+        "sourceColumnsList": [],
+        "usePythonUnicode": true,
+        "vectorSize": 256,
+        "vectorize": false
+      },
+      "alwaysShowComment": false
+    }
+  ],
+  "maxProcessedMemTableBytes": -1,
+  "previewMode": "ALL_ROWS",
+  "vizSampling": {
+    "_refreshTrigger": 0,
+    "autoRefreshSample": false
+  },
+  "analysisColumnData": {},
+  "sorting": [
+    {
+      "column": "count",
+      "ascending": false
+    }
+  ],
+  "globalSearchQuery": "",
+  "coloring": {
+    "scheme": "MEANING_AND_STATUS",
+    "individualColumns": [],
+    "valueColoringMode": "HASH"
+  }
+}

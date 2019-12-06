@@ -1,0 +1,181 @@
+{
+  "inputDatasetSmartName": "dss_ml_by_templates_performance",
+  "script": {
+    "steps": [
+      {
+        "steps": [
+          {
+            "type": "PythonUDF",
+            "params": {
+              "mode": "CELL",
+              "pythonSourceCode": "# Modify the process function to fit your needs\nimport json\n\ndef process(row):\n    try:\n        algo_details \u003d row[\"event_details_json_algorithms\"]\n        algo_details \u003d json.loads(algo_details)\n        algos \u003d algo_details.keys()\n        return algos\n    except:\n        return \u0027\u0027",
+              "column": "all_algos",
+              "stopOnError": true,
+              "usePythonUnicode": true,
+              "useKernel": false,
+              "vectorize": false,
+              "vectorSize": 256,
+              "sourceColumnsList": [],
+              "envSelection": {
+                "envMode": "INHERIT"
+              }
+            },
+            "metaType": "PROCESSOR",
+            "preview": false,
+            "disabled": false,
+            "alwaysShowComment": false
+          },
+          {
+            "type": "PythonUDF",
+            "params": {
+              "mode": "CELL",
+              "pythonSourceCode": "# Modify the process function to fit your needs\ndef process(row):\n    \n    try:\n        algos \u003d row[\"all_algos\"]\n        return len(algos.split(\u0027,\u0027))\n    except:\n        return \"no_algo\"",
+              "column": "num_algos",
+              "stopOnError": true,
+              "usePythonUnicode": true,
+              "useKernel": false,
+              "vectorize": false,
+              "vectorSize": 256,
+              "sourceColumnsList": [],
+              "envSelection": {
+                "envMode": "INHERIT"
+              }
+            },
+            "metaType": "PROCESSOR",
+            "preview": false,
+            "disabled": false,
+            "alwaysShowComment": false
+          },
+          {
+            "type": "ArrayUnfold",
+            "params": {
+              "column": "all_algos",
+              "countVal": true,
+              "overflowAction": "ERROR",
+              "limit": 100
+            },
+            "metaType": "PROCESSOR",
+            "preview": false,
+            "disabled": false,
+            "alwaysShowComment": false
+          },
+          {
+            "type": "ArrayFold",
+            "params": {
+              "column": "all_algos"
+            },
+            "metaType": "PROCESSOR",
+            "preview": false,
+            "disabled": false,
+            "alwaysShowComment": false
+          }
+        ],
+        "metaType": "GROUP",
+        "preview": false,
+        "disabled": false,
+        "name": "move (copy)",
+        "alwaysShowComment": false
+      },
+      {
+        "type": "FillEmptyWithValue",
+        "params": {
+          "value": "0",
+          "appliesTo": "COLUMNS",
+          "columns": [
+            "u\u0027CUSTOM_PYTHON_0\u0027",
+            "u\u0027CUSTOM_PYTHON_1\u0027",
+            "u\u0027decision_tree_classification\u0027",
+            "u\u0027neural_network\u0027",
+            "u\u0027svc_classifier\u0027",
+            "u\u0027logistic_regression\u0027",
+            "u\u0027knn\u0027",
+            "u\u0027xgboost\u0027",
+            "u\u0027lars_params\u0027",
+            "u\u0027sgd_classifier\u0027",
+            "u\u0027gbt_classification\u0027",
+            "u\u0027extra_trees\u0027",
+            "u\u0027random_forest_classification\u0027",
+            "u\u0027mllib_dt\u0027",
+            "u\u0027mllib_gbt\u0027",
+            "u\u0027mllib_logit\u0027",
+            "u\u0027mllib_rf\u0027",
+            "num_algos"
+          ]
+        },
+        "metaType": "PROCESSOR",
+        "preview": false,
+        "disabled": false,
+        "alwaysShowComment": false
+      }
+    ],
+    "maxProcessedMemTableBytes": -1,
+    "columnsSelection": {
+      "mode": "ALL"
+    },
+    "coloring": {
+      "scheme": "MEANING_AND_STATUS",
+      "individualColumns": [],
+      "valueColoringMode": "HASH"
+    },
+    "sorting": [
+      {
+        "column": "u\u0027random_forest_classification\u0027",
+        "ascending": false
+      }
+    ],
+    "analysisColumnData": {},
+    "explorationSampling": {
+      "selection": {
+        "maxStoredBytes": -1,
+        "filter": {
+          "distinct": false,
+          "enabled": false
+        },
+        "partitionSelectionMethod": "ALL",
+        "latestPartitionsN": 1,
+        "ordering": {
+          "enabled": false,
+          "rules": []
+        },
+        "samplingMethod": "HEAD_SEQUENTIAL",
+        "maxRecords": 10000,
+        "targetRatio": 0.02,
+        "withinFirstN": -1,
+        "maxReadUncompressedBytes": -1
+      },
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "vizSampling": {
+      "autoRefreshSample": false,
+      "_refreshTrigger": 0
+    },
+    "exploreUIParams": {
+      "autoRefresh": true
+    },
+    "globalSearchQuery": "",
+    "explorationFilters": [],
+    "previewMode": "ALL_ROWS"
+  },
+  "charts": [],
+  "name": "Analyze dss_ml_by_templates_performance",
+  "versionTag": {
+    "versionNumber": 1,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574871998998
+  },
+  "creationTag": {
+    "versionNumber": 0,
+    "lastModifiedBy": {
+      "login": "leo.dreyfus"
+    },
+    "lastModifiedOn": 1574871931096
+  },
+  "tags": [],
+  "customFields": {},
+  "checklists": {
+    "checklists": []
+  }
+}
