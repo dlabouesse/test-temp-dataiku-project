@@ -178,7 +178,7 @@
       }
     }
   },
-  "name": "Sandbox Léo",
+  "name": "Sandbox Léo (user-test-23)",
   "metrics": {
     "probes": [],
     "engineConfig": {
@@ -234,11 +234,11 @@
     }
   },
   "versionTag": {
-    "versionNumber": 18,
+    "versionNumber": 19,
     "lastModifiedBy": {
       "login": "leo"
     },
-    "lastModifiedOn": 1575628845418
+    "lastModifiedOn": 1575628848396
   },
   "creationTag": {
     "versionNumber": 0,
@@ -247,7 +247,7 @@
     },
     "lastModifiedOn": 1573811508808
   },
-  "shortDesc": "The project *Sandbox Léo* was created by Jérémy on Nov 15th 2019",
+  "shortDesc": "The project *Sandbox Léo* was created by Jérémy on Nov 15th 2019\nThe project *SANDBOX_L_O_USER_TEST_23* was copied from *SANDBOXLEO* by leo on Dec 06th 2019",
   "tags": [
     "imported",
     "duplicated"
