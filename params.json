@@ -234,11 +234,11 @@
     }
   },
   "versionTag": {
-    "versionNumber": 17,
+    "versionNumber": 18,
     "lastModifiedBy": {
       "login": "leo"
     },
-    "lastModifiedOn": 1575627423129
+    "lastModifiedOn": 1575628845418
   },
   "creationTag": {
     "versionNumber": 0,
@@ -249,7 +249,8 @@
   },
   "shortDesc": "The project *Sandbox Léo* was created by Jérémy on Nov 15th 2019",
   "tags": [
-    "imported"
+    "imported",
+    "duplicated"
   ],
   "customFields": {},
   "checklists": {
